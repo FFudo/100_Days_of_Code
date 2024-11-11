@@ -11,12 +11,16 @@ print(r'''.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 
 print("Welcome to Treasure Island. Your mission is to find the treasure")
 
-choice = input("There is a path to your right and one to your left. Which do you choose? Type 'left' or 'right'.").lower()
+choice = input("There is a path to your right and one to your left. "
+               "Which do you choose? Type 'left' or 'right'.").lower()
 
 if choice == "left":
-    choice = input("There is a river in front of you the current looks strong. You can either cross it or look for a better way. Type 'cross' or 'search'").lower()
+    choice = input("There is a river in front of you the current looks strong."
+                    "You can either cross it or look for a better way. Type 'cross' or 'search'").lower()
     if choice == "search":
-        choice = input("You found a bridge to cross. After some walking there is a house with a yellow, a blue or a green door. Choose one and type 'yellow', 'green' or 'blue'").lower()
+        choice = input("You found a bridge to cross. "
+                       "After some walking there is a house with a yellow, a blue or a green door. "
+                       "Choose one and type 'yellow', 'green' or 'blue'").lower()
         if choice == "blue":
             print("A vicious beast attacked you! Game Over.")
         elif choice == "green":
