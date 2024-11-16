@@ -3,20 +3,27 @@ from art import logo
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
 def caesar(encode_or_decode, original_text, shift_amount):
-    if encode_or_decode == "decode":
-        shift_amount *= -1
+    is_looping = True
+    while is_looping:
+        if encode_or_decode == "decode":
+            shift_amount *= -1
 
-    output_text = ""
+        output_text = ""
 
-    for letter in original_text:
-        if letter in alphabet:
-            shifted_pos = alphabet.index(letter) + shift_amount
-            shifted_pos %= len(alphabet)
-            output_text += alphabet[shifted_pos]
-        else:
-            output_text += letter
+        for letter in original_text:
+            if letter in alphabet:
+                shifted_pos = alphabet.index(letter) + shift_amount
+                shifted_pos %= len(alphabet)
+                output_text += alphabet[shifted_pos]
+            else:
+                output_text += letter
 
-    print(f"Here is the {encode_or_decode}d result: {output_text}")
+        print(f"Here is the {encode_or_decode}d result: {output_text}")
+
+        go_again = input("Type 'yes' if you want to go again. Otherwise, type 'no'.").lower()
+
+        if go_again == "no":
+            is_looping = False
 
 print(logo)
 
