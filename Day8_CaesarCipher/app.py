@@ -14,5 +14,14 @@ def encrypt(original_text, shift_amount):
         encoded_text += alphabet[shifted_pos]
 
     print(encoded_text)
+
+def decrypt(original_text, shift_amount):
+    decoded_text = ""
+    for letter in original_text:
+        shifted_pos = alphabet.index(letter) - shift_amount
+        shifted_pos %= len(alphabet)
+        decoded_text += alphabet[shifted_pos]
     
-encrypt(original_text=text, shift_amount=shift)
+    print(decoded_text)
+
+decrypt(original_text=text, shift_amount=shift)
