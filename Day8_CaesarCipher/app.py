@@ -20,6 +20,7 @@ def caesar(encode_or_decode, original_text, shift_amount):
 
     print(f"Here is the {encode_or_decode}d result: {output_text}")
 
+
 is_looping = True
 
 while is_looping:
