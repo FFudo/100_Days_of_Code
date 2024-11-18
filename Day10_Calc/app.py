@@ -24,14 +24,26 @@ calculations = {"+": add,
 
 print(logo)
 
-number1 = float(input("Whats the first number?: "))
+loop = True
+while loop:
+    number1 = float(input("Whats the first number?: "))
+    continue_with_n1 = True
 
-for key in calculations:
-    print(key)
+    while continue_with_n1:
+        for key in calculations:
+            print(key)
 
-operator = input("Pick an operation: ")
-number2 = float(input("Whats the next number? "))
+        operator = input("Pick an operation: ")
+        number2 = float(input("Whats the next number? "))
 
-result = calculations[operator](number1, number2)
+        result = calculations[operator](number1, number2)
 
-print(f"{number1} {operator} {number2} = {result}")
+        print(f"{number1} {operator} {number2} = {result}")
+        user_choice = input(f"Type 'y' to continue calculating with {result}, type 'n' to start a new calculation or 'q' to quit the programm.").lower()
+
+        if user_choice != "y":
+            continue_with_n1 = False
+            if user_choice == "q":
+                loop = False
+
+        number1 = result
