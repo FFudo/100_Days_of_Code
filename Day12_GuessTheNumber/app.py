@@ -23,7 +23,7 @@ def play_game(dif):
 
         if guess == SECRET_NUMBER:
             print(f"You got it! The answer was {SECRET_NUMBER}.")
-            break
+            return
         elif guess > SECRET_NUMBER:
             print("Too high.")
         else:
@@ -32,9 +32,6 @@ def play_game(dif):
         print("Guess again!")
         attempts -= 1
     
-    if attempts == 0:
-        print(f"You have no attempts left! The answer was {SECRET_NUMBER}.")
-
 
 if __name__ == "__main__":
     guessing_game()
