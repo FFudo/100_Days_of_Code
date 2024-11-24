@@ -1,8 +1,14 @@
 from data import resources, MENU
 
+OPTIONS = ["off", "report", "espresso", "latte", "cappuccino"]
+
 def coffee_machine():
     while True:
         choice = input("What would you like? (espresso/latte/cappuccino):").lower()
+
+        if choice not in OPTIONS:
+            print("Please insert a valid value!")
+            continue
 
         if choice == "off":
             break
