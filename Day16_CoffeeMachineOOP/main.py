@@ -16,10 +16,8 @@ def run_coffee_machine():
             money_machine.report()
         else:
             coffee = menu.find_drink(choice)
-            if coffee:
-                if coffee_maker.is_resource_sufficient(coffee):
-                    if money_machine.make_payment(coffee.cost):
-                        coffee_maker.make_coffee(coffee)
+            if coffee and coffee_maker.is_resource_sufficient(coffee) and money_machine.make_payment(coffee.cost):
+                coffee_maker.make_coffee(coffee)
 
 
 if __name__ == "__main__":
