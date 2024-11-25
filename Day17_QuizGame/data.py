@@ -51,7 +51,7 @@ question_data = [
         "type": "boolean",
         "difficulty": "easy",
         "category": "Entertainment: Japanese Anime &amp; Manga",
-        "question": "Gosho Aoyama Made This Series: (Detective Conan \/ Case Closed!)",
+        "question": r"Gosho Aoyama Made This Series: (Detective Conan \/ Case Closed!)",
         "correct_answer": "True",
         "incorrect_answers": ["False"],
     },
