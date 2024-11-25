@@ -6,4 +6,5 @@ class QuizBrain:
 
     
     def next_question(self):
-        choice = input(f"Q. {self.question_number}: {self.question_list[self.question_number].text} (True/False): ").lower()
+        choice = input(f"Q. {self.question_number + 1}: {self.question_list[self.question_number].text} (True/False): ").lower()
+        self.question_number += 1
