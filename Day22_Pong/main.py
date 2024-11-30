@@ -3,6 +3,7 @@ from turtle import Screen
 
 from ball import Ball
 from paddle import Paddle
+from scoreboard import Scoreboard
 
 P1_START = (-350, 0)
 P2_START = (350, 0)
@@ -16,6 +17,7 @@ screen.tracer(0)
 p1 = Paddle(P1_START)
 p2 = Paddle(P2_START)
 ball = Ball()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkeypress(p1.up, "w")
@@ -41,9 +43,12 @@ while game_is_on:
 
     if ball.xcor() > 400:
         ball.to_middle()
+        scoreboard.p1_score += 1
     elif ball.xcor() < -400:
         ball.to_middle()
+        scoreboard.p2_score += 1
 
+    scoreboard.update_scoreboard()
 
     screen.update()
 
