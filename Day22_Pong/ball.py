@@ -15,3 +15,9 @@ class Ball(Turtle):
         new_x = self.xcor() + (self.speed * self.x_dir)
         new_y = self.ycor() + (self.speed * self.y_dir)
         self.goto(new_x, new_y)
+    
+    def change_y_direction(self):
+        self.y_dir *= -1
+
+    def change_x_direction(self):
+        self.x_dir *= -1
