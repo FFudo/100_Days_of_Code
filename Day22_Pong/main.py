@@ -31,9 +31,19 @@ while game_is_on:
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.change_y_direction()
 
-    
-    if ball.xcor() > 320 and ball.distance(p2) < 50 or ball.xcor() < -320 and ball.distance(p1) < 50:
+    if (
+        ball.xcor() > 320
+        and ball.distance(p2) < 50
+        or ball.xcor() < -320
+        and ball.distance(p1) < 50
+    ):
         ball.change_x_direction()
+
+    if ball.xcor() > 400:
+        ball.to_middle()
+    elif ball.xcor() < -400:
+        ball.to_middle()
+
 
     screen.update()
 
