@@ -9,8 +9,8 @@ class Ball(Turtle):
         self.color("white")
         self.penup()
         self.shape("circle")
-        self.speed = 10
-        self.x_dir = 1
+        self.ball_speed = 10
+        self.x_dir = random.choice([-1, 1])
         self.y_dir = 1
 
     def to_middle(self):
@@ -19,8 +19,8 @@ class Ball(Turtle):
         self.y_dir = random.choice([-1, 1])
 
     def move(self):
-        new_x = self.xcor() + (self.speed * self.x_dir)
-        new_y = self.ycor() + (self.speed * self.y_dir)
+        new_x = self.xcor() + (self.ball_speed * self.x_dir)
+        new_y = self.ycor() + (self.ball_speed * self.y_dir)
         self.goto(new_x, new_y)
 
     def change_y_direction(self):
@@ -28,3 +28,8 @@ class Ball(Turtle):
 
     def change_x_direction(self):
         self.x_dir *= -1
+        self.change_speed()
+
+    def change_speed(self):
+        self.ball_speed += random.randint(-5, 5)
+        self.ball_speed = min(max(self.ball_speed, 17), 23)
