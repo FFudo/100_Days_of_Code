@@ -7,16 +7,27 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.color("white")
         self.teleport(0, 250)
+        self.highscore = 0
         self.score = 0
         self.draw_score()
 
     def draw_score(self):
         self.clear()
-        self.write(arg=f"Score: {self.score}", align="center", font=('Arial', 16, 'normal'))
+        self.write(
+            arg=f"Score: {self.score} Highscore: {self.highscore}",
+            align="center",
+            font=("Arial", 16, "normal"),
+        )
+
+    def reset_score(self):
+        if self.score > self.highscore:
+            self.highscore = self.score
+        self.score = 0
+        self.draw_score()
 
     def game_over(self):
         self.teleport(0, 0)
-        self.write(arg=f"GAME OVER", align="center", font=('Arial', 16, 'normal'))
+        self.write(arg=f"GAME OVER", align="center", font=("Arial", 16, "normal"))
 
     def update_score(self):
         self.score += 1
