@@ -15,7 +15,7 @@ with open ("./Day24_MailMerger/Input/Letters/starting_letter.txt", "r") as f:
 
 for name in names:
     new_letter = start_letter.replace("[name]", name)
-    with open(f"./Day24_MailMerger/Output/{name}_letter.txt", "w") as f:
+    with open(f"./Day24_MailMerger/Output/letter_for_{name}.txt", "w") as f:
         f.write(new_letter)
     
 
