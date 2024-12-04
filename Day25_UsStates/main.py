@@ -33,11 +33,7 @@ while len(correct_states_list) < 50:
         tim.goto(cords)
         tim.write(arg=answer_state, align="center", font=("Courier", 8, "normal"))
 
-states_to_learn = []
-
-for state in states_list:
-    if state not in correct_states_list:
-        states_to_learn.append(state)
+states_to_learn = [state for state in states_list if state not in correct_states_list]
 
 df2 = pd.DataFrame(states_to_learn)
 df2.to_csv("./Day25_UsStates/states_to_learn.csv")
