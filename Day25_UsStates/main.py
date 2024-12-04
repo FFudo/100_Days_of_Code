@@ -9,7 +9,6 @@ image = "./Day25_UsStates/blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
 
-correct_states_total = 0
 correct_states_list = []
 df = pd.read_csv("./Day25_UsStates/50_states.csv")
 states_list = df["state"].to_list()
@@ -19,19 +18,26 @@ tim.penup()
 tim.hideturtle()
 
 
-while correct_states_total < 50:
+while len(correct_states_list) < 50:
     answer_state = screen.textinput(
-        title=f"{correct_states_total}/50 States Correct", prompt="What's another state's name?"
+        title=f"{len(correct_states_list)}/50 States Correct",
+        prompt="What's another state's name?",
     ).title()
-    print(answer_state)
+
+    if answer_state == "Exit":
+        break
     if answer_state in states_list:
-        correct_states_total += 1
         correct_states_list.append(answer_state)
         correct_row = df[df["state"] == answer_state]
-        print(correct_row)
         cords = (correct_row.x.values[0], correct_row.y.values[0])
         tim.goto(cords)
-        tim.write(arg=answer_state, align="center", font=("Courier", 12, "normal"))
+        tim.write(arg=answer_state, align="center", font=("Courier", 8, "normal"))
 
+states_to_learn = []
 
+for state in states_list:
+    if state not in correct_states_list:
+        states_to_learn.append(state)
 
+df2 = pd.DataFrame(states_to_learn)
+df2.to_csv("./Day25_UsStates/states_to_learn.csv")
