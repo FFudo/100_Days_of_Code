@@ -13,8 +13,13 @@ LONG_BREAK_MIN = 20
 reps = 0
 timer = None
 
-# ---------------------------- SET FOCUS ------------------------------- #
 
+# ---------------------------- SET FOCUS ------------------------------- #
+def set_focus():
+    window.deiconify()
+    window.attributes("-topmost", 1)
+    window.attributes("-topmost", 0)
+    window.focus_force()
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
@@ -25,7 +30,7 @@ def reset_timer():
     title_label.config(text="Timer")
     check_marks.config(text="")
     reps = 0
-    
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
@@ -58,9 +63,10 @@ def count_down(count):
         global timer
         timer = window.after(1000, count_down, count - 1)
     else:
+        set_focus()
         start_timer()
         marks = ""
-        work_sessions = math.floor(reps/2)
+        work_sessions = math.floor(reps / 2)
         for _ in range(work_sessions):
             marks += "✔"
         check_marks.config(text=marks)
@@ -87,7 +93,9 @@ start_btn = Button(
 )
 start_btn.grid(column=0, row=2)
 
-reset_btn = Button(text="Reset", borderwidth=1, highlightthickness=0, command=reset_timer)
+reset_btn = Button(
+    text="Reset", borderwidth=1, highlightthickness=0, command=reset_timer
+)
 reset_btn.grid(column=2, row=2)
 
 check_marks = Label(bg=YELLOW, fg=GREEN, font=(FONT_NAME, 18, "bold"))
