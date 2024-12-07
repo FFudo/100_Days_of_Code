@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -6,13 +7,26 @@ from tkinter import *
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def add_data():
     website = website_entry.get()
-    website_entry.delete(0, END)
     username = username_entry.get()
-    username_entry.delete(0, END)
     password = password_entry.get()
-    password_entry.delete(0, END)
-    with open("./Day29_PasswordManager/data.txt", "a") as f:
-        f.write(f"{website} | {username} | {password}\n")
+
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showinfo(
+            title="Ooops", message="Please enter a website and password."
+        )
+    else:
+        is_ok = messagebox.askokcancel(
+            title=website,
+            message=f"These are the details entered: \nUsername: {username}"
+            f"\nPassword: {password}\nDo you want to save?",
+        )
+
+        if is_ok:
+            website_entry.delete(0, END)
+            username_entry.delete(0, END)
+            password_entry.delete(0, END)
+            with open("./Day29_PasswordManager/data.txt", "a") as f:
+                f.write(f"{website} | {username} | {password}\n")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
