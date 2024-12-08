@@ -80,6 +80,32 @@ def generate_password():
     pyperclip.copy(password)
 
 
+# ---------------------------- SEARCH DATA ------------------------------- #
+def search_data():
+    website = website_entry.get()
+    if len(website) == 0:
+        messagebox.showinfo(title="Ooops", message="Please enter a website.")
+    else:
+        try:
+            with open("./Day29and30_PasswordManager/data.json", "r") as f:
+                data = json.load(f)
+        except:
+            messagebox.showinfo(title="Ooops", message="No data file found.")
+        else:
+            try:
+                username = data[website]["username"]
+                password = data[website]["password"]
+            except KeyError:
+                messagebox.showinfo(
+                    title="Ooops", message="There is no entry for this website."
+                )
+            else:
+                messagebox.showinfo(
+                    title="Website Entry",
+                    message=f"Username: {username}\n Password: {password}",
+                )
+
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def add_data():
     website = website_entry.get()
@@ -108,7 +134,6 @@ def add_data():
 
 
 # ---------------------------- UI SETUP ------------------------------- #
-
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50)
@@ -127,8 +152,8 @@ username_label.grid(column=0, row=2)
 password_label = Label(text="Password:")
 password_label.grid(column=0, row=3)
 
-website_entry = Entry(width=40)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=22)
+website_entry.grid(column=1, row=1)
 website_entry.focus()
 
 username_entry = Entry(width=40)
@@ -136,6 +161,9 @@ username_entry.grid(column=1, row=2, columnspan=2)
 
 password_entry = Entry(width=22)
 password_entry.grid(column=1, row=3)
+
+search_button = Button(text="Search", command=search_data)
+search_button.grid(column=2, row=1)
 
 password_button = Button(text="Generate Password", command=generate_password)
 password_button.grid(column=2, row=3)
