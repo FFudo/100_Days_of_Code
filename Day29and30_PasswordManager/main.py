@@ -1,3 +1,4 @@
+import json
 from random import choice, randint, shuffle
 from tkinter import *
 from tkinter import messagebox
@@ -84,25 +85,27 @@ def add_data():
     website = website_entry.get()
     username = username_entry.get()
     password = password_entry.get()
+    new_data = {
+        website: {
+            "username": username,
+            "password": password
+        }
+    }
 
     if len(website) == 0 or len(password) == 0:
         messagebox.showinfo(
             title="Ooops", message="Please enter a website and password."
         )
     else:
-        is_ok = messagebox.askokcancel(
-            title=website,
-            message=f"These are the details entered: \nUsername: {username}"
-            f"\nPassword: {password}\nDo you want to save?",
-        )
+        website_entry.delete(0, END)
+        username_entry.delete(0, END)
+        password_entry.delete(0, END)
+        with open("./Day29and30_PasswordManager/data.json", "r") as f:
+            data = json.load(f)
+            data.update(new_data)
 
-        if is_ok:
-            website_entry.delete(0, END)
-            username_entry.delete(0, END)
-            password_entry.delete(0, END)
-            with open("./Day29_PasswordManager/data.txt", "a") as f:
-                f.write(f"{website} | {username} | {password}\n")
-
+        with open("./Day29and30_PasswordManager/data.json", "w") as f:
+            json.dump(data, f, indent=4)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -111,7 +114,7 @@ window.title("Password Manager")
 window.config(padx=50, pady=50)
 
 canvas = Canvas(width=200, height=200)
-password_img = PhotoImage(file="./Day29_PasswordManager/logo.png")
+password_img = PhotoImage(file="./Day29and30_PasswordManager/logo.png")
 canvas.create_image(100, 100, image=password_img)
 canvas.grid(column=1, row=0)
 
