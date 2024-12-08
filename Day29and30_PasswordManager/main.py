@@ -85,12 +85,7 @@ def add_data():
     website = website_entry.get()
     username = username_entry.get()
     password = password_entry.get()
-    new_data = {
-        website: {
-            "username": username,
-            "password": password
-        }
-    }
+    new_data = {website: {"username": username, "password": password}}
 
     if len(website) == 0 or len(password) == 0:
         messagebox.showinfo(
@@ -100,12 +95,17 @@ def add_data():
         website_entry.delete(0, END)
         username_entry.delete(0, END)
         password_entry.delete(0, END)
-        with open("./Day29and30_PasswordManager/data.json", "r") as f:
-            data = json.load(f)
+        try:
+            with open("./Day29and30_PasswordManager/data.json", "r") as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            with open("./Day29and30_PasswordManager/data.json", "w") as f:
+                json.dump(new_data, f, indent=4)
+        else:
             data.update(new_data)
+            with open("./Day29and30_PasswordManager/data.json", "w") as f:
+                json.dump(data, f, indent=4)
 
-        with open("./Day29and30_PasswordManager/data.json", "w") as f:
-            json.dump(data, f, indent=4)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
