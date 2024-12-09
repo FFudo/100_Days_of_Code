@@ -92,17 +92,16 @@ def search_data():
         except:
             messagebox.showinfo(title="Ooops", message="No data file found.")
         else:
-            try:
+            if website in data:
                 username = data[website]["username"]
                 password = data[website]["password"]
-            except KeyError:
-                messagebox.showinfo(
-                    title="Ooops", message="There is no entry for this website."
-                )
-            else:
                 messagebox.showinfo(
                     title="Website Entry",
                     message=f"Username: {username}\n Password: {password}",
+                )
+            else:
+                messagebox.showinfo(
+                    title="Ooops", message="There is no entry for this website."
                 )
 
 
