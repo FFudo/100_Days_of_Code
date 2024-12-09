@@ -5,14 +5,34 @@ import pandas as pd
 
 BACKGROUND_COLOR = "#B1DDC6"
 flip_timer = None
+current_card = []
 
 #### DATA LOGIC ####
-df = pd.read_csv("Day31_FlashCardApp/data/french_words.csv")
+try:
+    with open("Day31_FlashCardApp/data/to_learn.csv", "r") as f:
+        df = pd.read_csv(f)
+except:
+    df = pd.read_csv("Day31_FlashCardApp/data/french_words.csv")
+
 to_learn = df.to_dict(orient="records")
 
 
+def update_to_learn_csv():
+    df = pd.DataFrame(to_learn)
+    df.to_csv("Day31_FlashCardApp/data/to_learn.csv")
+
+
+#### RIGHT BUTTON LOGIC ####
+def remove_current_card():
+    global current_card
+    to_learn.remove(current_card)
+    next_card()
+
+
+#### CARD FLIP LOGIC ####
 def next_card():
-    global flip_timer
+    update_to_learn_csv()
+    global flip_timer, current_card
     if flip_timer:
         window.after_cancel(flip_timer)
 
@@ -63,7 +83,7 @@ wrong_button.grid(column=0, row=1)
 
 right_img = PhotoImage(file="./Day31_FlashCardApp/images/right.png")
 right_button = Button(
-    image=right_img, highlightthickness=0, borderwidth=0, command=next_card
+    image=right_img, highlightthickness=0, borderwidth=0, command=remove_current_card
 )
 right_button.grid(column=1, row=1)
 
