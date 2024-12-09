@@ -4,6 +4,7 @@ from tkinter import *
 import pandas as pd
 
 BACKGROUND_COLOR = "#B1DDC6"
+flip_timer = None
 
 #### DATA LOGIC ####
 df = pd.read_csv("Day31_FlashCardApp/data/french_words.csv")
@@ -11,8 +12,11 @@ to_learn = df.to_dict(orient="records")
 
 
 def next_card():
-    current_card = random.choice(to_learn)
+    global flip_timer
+    if flip_timer:
+        window.after_cancel(flip_timer)
 
+    current_card = random.choice(to_learn)
     french_word = current_card["French"]
     english_word = current_card["English"]
 
@@ -20,14 +24,15 @@ def next_card():
     card_canvas.itemconfig(word_label, fill="black", text=french_word)
     card_canvas.itemconfig(card_img, image=cardfront_img)
 
-    timer = window.after(3000, display_backside, english_word)
+    flip_timer = window.after(3000, display_backside, english_word)
 
 
 def display_backside(word):
+    global flip_timer
     card_canvas.itemconfig(lang_label, fill="white", text="English")
     card_canvas.itemconfig(word_label, fill="white", text=word)
     card_canvas.itemconfig(card_img, image=cardback_img)
-    timer2 = window.after(3000, next_card)
+    flip_timer = window.after(3000, next_card)
 
 
 #### UI ####
