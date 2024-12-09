@@ -7,31 +7,25 @@ BACKGROUND_COLOR = "#B1DDC6"
 flip_timer = None
 current_card = []
 
-#### DATA LOGIC ####
+#### DATA READ LOGIC ####
 try:
-    with open("Day31_FlashCardApp/data/to_learn.csv", "r") as f:
-        df = pd.read_csv(f)
-except:
+    df = pd.read_csv("Day31_FlashCardApp/data/to_learn.csv")
+except FileNotFoundError:
     df = pd.read_csv("Day31_FlashCardApp/data/french_words.csv")
 
 to_learn = df.to_dict(orient="records")
 
 
-def update_to_learn_csv():
-    df = pd.DataFrame(to_learn)
-    df.to_csv("Day31_FlashCardApp/data/to_learn.csv")
-
-
 #### RIGHT BUTTON LOGIC ####
 def remove_current_card():
-    global current_card
     to_learn.remove(current_card)
+    data = pd.DataFrame(to_learn)
+    data.to_csv("Day31_FlashCardApp/data/to_learn.csv", index=False)
     next_card()
 
 
 #### CARD FLIP LOGIC ####
 def next_card():
-    update_to_learn_csv()
     global flip_timer, current_card
     if flip_timer:
         window.after_cancel(flip_timer)
