@@ -3,9 +3,7 @@ import random
 import smtplib
 
 import pandas as pd
-
-my_email = "MS_RV8TEx@trial-0p7kx4xyd78l9yjr.mlsender.net"
-password = "rpcLKxav6woMNYyI"
+from config import *
 
 ##################### Extra Hard Starting Project ######################
 # 1. Update the birthdays.csv
