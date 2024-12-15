@@ -1,15 +1,16 @@
-from config import api_key
-
 import requests
+from config import api_key
 
 parameters = {
     "lat": 48.208176,
     "lon": 16.373819,
     "appid": api_key,
-    "cnt" : 4,
+    "cnt": 4,
 }
 
-respone = requests.get("https://api.openweathermap.org/data/2.5/forecast", params=parameters)
+respone = requests.get(
+    "https://api.openweathermap.org/data/2.5/forecast", params=parameters
+)
 respone.raise_for_status()
 data = respone.json()["list"]
 
@@ -21,7 +22,3 @@ for hour in data:
 
 if will_rain:
     print("It will rain")
-
-
-
-
