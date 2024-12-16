@@ -25,8 +25,6 @@ def get_percent():
     return change_percent
 
 
-## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
 def get_news():
     parameters = {
         "apiKey": NEWS_APIKEY,
@@ -43,21 +41,16 @@ def get_news():
 
 
 def run_app():
-    percent = get_percent()
-    if abs(percent) >= 5:
-        pass
+    percent = round(get_percent(), 2)
+
+    if abs(percent) >= 1:
+        news = get_news()
+
+        print(f"{STOCK}: {percent}%")
+        for n in news:
+            print(f"Headline: {n["headline"]}\nBrief: {n["brief"]}")
 
 
 if __name__ == "__main__":
-    get_news()
+    run_app()
 
-# Optional: Format the SMS message like this:
-"""
-TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-"""
