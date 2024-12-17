@@ -3,8 +3,11 @@ from config import token
 
 pixela_endpoint = "https://pixe.la/v1/users"
 user_params = {
-    "token": token
+    "token": token,
+    "username": "ffudo",
+    "agreeTermsOfService": "yes",
+    "notMinor": "yes",
 }
 
-
-requests.post()
+# response = requests.post(url=pixela_endpoint, json=user_params)
+# print(response.text)
