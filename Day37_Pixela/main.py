@@ -13,17 +13,16 @@ user_params = {
 # print(response.text)
 
 graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
+
 graph_params = {
     "id": "graph1",
     "name": "push up graph",
     "unit": "times",
     "type": "int",
     "color": "momiji",
-    "timezone": "Europe/Berlin",
 }
 
-headers = {
-    "X-USER-TOKEN": TOKEN
-}
+header = {"X-USER-TOKEN": TOKEN}
 
-requests.post()
+response = requests.post(url=graph_endpoint, json=graph_params, headers=header)
+print(response.text)
