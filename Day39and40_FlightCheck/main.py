@@ -1,12 +1,7 @@
-from data_manager import DataManager
-from flight_search import FlightSearch
-
+from flight_data import FlightData
 
 def run_app():
-    data_manager = DataManager()
-    data = data_manager.get_data()
-    flight_search = FlightSearch()
-
+    flight_data = FlightData()
 
 if __name__ == "__main__":
     run_app()
