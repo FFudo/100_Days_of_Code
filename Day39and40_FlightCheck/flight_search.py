@@ -5,7 +5,7 @@ from config import FLIGHT_API_KEY, FLIGHT_API_SECRET
 class FlightSearch:
     # This class is responsible for talking to the Flight Search API.
     def __init__(self):
-        self.api_url = "https://test.api.amadeus.com/v1"
+        self.api_url = "https://test.api.amadeus.com/v2"
         self.token = self.get_token()["access_token"]
 
     def get_token(self):
@@ -24,4 +24,18 @@ class FlightSearch:
         header = {"authorization": f"Bearer {self.token}"}
         parameters = {"keyword": cityname, "max": 1}
         response = requests.get(url=url, headers=header, params=parameters)
-        return response.json()["data"][0]["iataCode"]
+        data = response.json()
+        return data["data"][0]["iataCode"]
+
+    def get_flights(self, dest: str, start_day: str, return_day: str):
+        url = self.api_url + "/shopping/flight-offers"
+        header = {"authorization": f"Bearer {self.token}"}
+        parameters = {
+            "originLocationCode": "VIE",
+            "destinationLocationCode": dest,
+            "departureDate": start_day,
+            "returnDate": return_day,
+            "adults": 1,
+        }
+        response = requests.get(url=url, params=parameters, headers=header)
+        return response.json()
