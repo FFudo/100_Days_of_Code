@@ -1,4 +1,5 @@
 import gspread
+import pandas as pd
 from google.oauth2.service_account import Credentials
 
 
@@ -15,4 +16,7 @@ class DataManager:
         self.sheet = client.open_by_key(sheet_id)
 
     def get_data(self):
-        return self.sheet.sheet1.get_all_records()
+        return pd.DataFrame(self.sheet.sheet1.get_all_records())
+
+    def update_data(self, df: pd.DataFrame):
+        self.sheet.sheet1.update([df.columns.values.tolist()] + df.values.tolist())
