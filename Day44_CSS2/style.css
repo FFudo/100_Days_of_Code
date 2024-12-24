@@ -10,6 +10,14 @@ h1, p {
     text-align: center;
 }
 
+h1 {
+    font-size: 5rem;
+}
+
+p {
+    font-size: 2rem;
+}
+
 div {
     width: 50%;
     margin-left: 25%;
@@ -17,5 +25,7 @@ div {
 
 img {
     width: 100%;
-    border-color: white;
+    border: solid white 4px;
+    margin-top: 5%;
+    margin-bottom: 2%;
 }
